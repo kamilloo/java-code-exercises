@@ -32,7 +32,7 @@ public class ReverseSentenceTest {
                 },
                 {
                     "repole-veDdnek-caBroineS",
-                    "Senior-backend-developer",
+                    "Senior-Backend-Developer",
                 }
         };
     }

@@ -22,25 +22,29 @@ public class ReverseSentence {
             String group = matcher.group();
             matchedFound.add(group);
         }
+        Collections.reverse(matchedFound);
 
-        matchedFound =
         reverseText = new StringBuilder();
-        matchedFound.forEach((x) -> this.reverseText.append(new StringBuilder(x.toString()).reverse()));
+        matchedFound.stream()
+                .map((String x) -> new StringBuilder(x).reverse().toString())
+                .toList()
+                .forEach((x) -> this.reverseText.append(x));
 
-        StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder output = new StringBuilder();
 
         for (int i = 0; i<inputString.length(); i++) {
-            Matcher charMather = pattern.matcher(new StringBuilder().append(inputString.charAt(i)));
+            String inputLetter = String.valueOf((inputString.charAt(i)));
+            Matcher charMather = pattern.matcher(inputLetter);
             if (charMather.find()) {
-                char letter = reverseText.charAt(0);
+                char reverseLetter = reverseText.charAt(0);
                 reverseText = new StringBuilder(reverseText.substring(1));
-                stringBuilder.append(letter);
+                output.append(reverseLetter);
             } else {
-                stringBuilder.append(inputString.charAt(i));
+                output.append(inputLetter);
             }
 
         }
 
-        return stringBuilder.toString();
+        return String.valueOf(output);
     }
 }
