@@ -1,48 +1,42 @@
 package rotateImage;
 
-import java.sql.Array;
 import java.util.ArrayList;
 
 public class Activity {
 
-    CubicTranformer cubicTranformer = new CubicTranformer();
-    Carrier carrier = new Carrier();
+    CubicTransformer cubicTransformer = new CubicTransformer();
     public int[][] rotate(int[][] cubic){
 
         //rotate algorithm
 
         //2d cubic
+        //4x4
+        // first row -> last column (0 -> 3)
+        // i-th row -> last - i-th column (1 -> 2) (1 -> 3-1)
+        // last row -> first column (3 -> 0) (3 -> 3 - 3)
+
+        // Cell address:
+        // column: lastColumn - old row
+
+
         //Create Carrier
         //spread cubic to flat list
         //initial list node with cell address and value
         //set direction (right, down, left, up)
         //move value to next cell (change cell address)
         //collapse flat list into cubic
-
-        VectorFactory vectorFactory = new VectorFactory(columnLength,rowLength);
-        ArrayList<Cell> cells = cubicTranformer.spread(cubic);
+        int columnLength = cubic[0].length;
+        int rowLength = cubic.length;
+        Carrier carrier = new Carrier(columnLength, rowLength);
+        ArrayList<Cell> cells = cubicTransformer.spread(cubic);
 
         ArrayList<Cell> rotatedCells = new ArrayList<Cell>();
 
         cells.forEach((Cell cell) -> {
-            Vector vector = vectorFactory.create(cell.cellAddress);
-            rotatedCells.add(carrier.move(cell, vector));
+            rotatedCells.add(carrier.move(cell));
         });
 
-        int[][] rotatedCubic = cubicTranformer.colapse(rotatedCells);
-
-
-
-        int[] left = [1,0];
-        int[] right = [-1,0];
-        int[] up = [0,1];
-        int[] down = [0,-1];
-        return rotatedCubic;
-
-//        A0  B0 C0
-//        A1  B1 C2
-
-
+        return cubicTransformer.collapse(rotatedCells, rowLength, columnLength);
 
     }
 }
