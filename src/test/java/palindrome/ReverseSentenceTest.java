@@ -4,6 +4,9 @@ import org.junit.jupiter.api.Assertions;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.util.Scanner;
+import java.util.Stack;
+
 public class ReverseSentenceTest {
 
     @Test
@@ -21,6 +24,11 @@ public class ReverseSentenceTest {
         String actual = generator.reverse(inputSentence);
 
         Assertions.assertEquals(reserveSentence, actual);
+
+        int number = 1_000_000;
+
+        Assertions.assertEquals(1000000,number);
+
     }
 
     @DataProvider(name = "input-sentences")

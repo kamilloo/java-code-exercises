@@ -1,5 +1,3 @@
-package a;
-
 import java.util.Scanner;
 
 /**
